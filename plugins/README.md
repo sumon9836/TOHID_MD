@@ -1,9 +1,0 @@
------------
-
-***WELCOME TO TOHID_MD PLUGINS LIST CREATED BY TOHID KHAN 
-
------------
-
-***THE WORLD BEST WHATSAPP BOT***
-
-----------
