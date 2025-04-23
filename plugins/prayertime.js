@@ -71,7 +71,7 @@ async(conn, mek, m, {from, l, quoted, body, isCmd, command, args, q, isGroup, se
 
         // Optionally, send an audio file related to the prayer time
         await conn.sendMessage(from, {
-            audio: { url: 'https://github.com/XdTechPro/KHAN-DATA/raw/refs/heads/main/autovoice/Islamic.m4a' },
+            audio: { url: 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/Islamic.m4a' },
             mimetype: 'audio/mp4',
             ptt: false
         }, { quoted: mek });
