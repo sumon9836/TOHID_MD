@@ -30,7 +30,7 @@
 ### **PAIRING CODE QR CODE**
    - Visit the bot site to generate a pairing code and get **SESSION ID.**
 
-     [![TOHID_MD Github Repo](https://img.shields.io/badge/Whatsapp-Pair%20Code-green?style=for-the-badge&logo=Whatsapp)](https://tohid-ai-pair.onrender.com/)
+     [![TOHID_MD Github Repo](https://img.shields.io/badge/Whatsapp-Pair%20Code-green?style=for-the-badge&logo=Whatsapp)](https://tohid-md-pair-06797088617d.herokuapp.com/)
 
 ### DEPLOY BY SESSION ID (WHATSAPP LOG WITH PAIR CODE)
 
