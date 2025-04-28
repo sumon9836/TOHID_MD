@@ -5,7 +5,7 @@ cmd({
     pattern: "pair",
     alias: ["getpair", "clonebot"],
     react: "✅",
-    desc: "Get pairing code for Tohid_Md bot",
+    desc: "Get pairing code for TOHID_MD bot",
     category: "download",
     use: ".pair +917849917350",
     filename: __filename
@@ -20,7 +20,7 @@ cmd({
         }
 
         // Make API request to get pairing code
-        const response = await axios.get(`https://tohid-ai-pair-636db81aba9d.herokuapp.com/pair?phone=${encodeURIComponent(phoneNumber)}`);
+        const response = await axios.get(`https://tohid-ai-pair1-a0c7bc9ba92a.herokuapp.com/pair?phone=${encodeURIComponent(phoneNumber)}`);
         
         if (!response.data || !response.data.code) {
             return await reply("❌ Failed to retrieve pairing code. Please try again later.");
@@ -49,7 +49,7 @@ cmd({
     pattern: "pair2",
     alias: ["getpair2", "clonebot2"],
     react: "✅",
-    desc: "Get pairing code for Tohid_Md bot",
+    desc: "Get pairing code for TOHID_MD bot",
     category: "download",
     use: ".pair +917849917350",
     filename: __filename
@@ -64,7 +64,7 @@ cmd({
         }
 
         // Make API request to get pairing code
-        const response = await axios.get(`https://tohid-ai-pair-636db81aba9d.herokuapp.com/pair?phone=${encodeURIComponent(phoneNumber)}`);
+        const response = await axios.get(`https://tohid-ai-pair1-a0c7bc9ba92a.herokuapp.com/pair?phone=${encodeURIComponent(phoneNumber)}`);
         
         if (!response.data || !response.data.code) {
             return await reply("❌ Failed to retrieve pairing code. Please try again later.");
