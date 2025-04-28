@@ -29,6 +29,7 @@ const {
   const ff = require('fluent-ffmpeg')
   const P = require('pino')
   const config = require('./config')
+  const GroupEvents = require('./lib/groupevents');
   const qrcode = require('qrcode-terminal')
   const StickersTypes = require('wa-sticker-formatter')
   const util = require('util')
@@ -112,8 +113,8 @@ const port = process.env.PORT || 9090;
   console.log('Plugins installed successful ✅')
   console.log('Bot connected to whatsapp ✅')
   
-  let up = `*Hello there Tohid_Md User! \ud83d\udc4b\ud83c\udffb* \n\n> Simple , Straight Forward But Loaded With Features \ud83c\udf8a, Meet Tohid_Md WhatsApp Bot.\n\n *Thanks for using Tohid_Md \ud83d\udea9* \n\n> Join WhatsApp Channel :- ⤵️\n \https://whatsapp.com/channel/0029VaGyP933bbVC7G0x0i2T\n\n- *YOUR PREFIX:* = ${prefix}\n\nDont forget to give star to repo ⬇️\n\nhttps://github.com/Tohidkhan6332/TOHID_MD\n\n> © Powered By Tohid_Md\ud83d\udda4`;
-    conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/LdsCGP4M/lordali.jpg` }, caption: up })
+  let up = `*Hello there Tohid_Md User! \ud83d\udc4b\ud83c\udffb* \n\n> Simple , Straight Forward But Loaded With Features \ud83c\udf8a, Meet Tohid_Md  WhatsApp Bot.\n\n *Thanks for using Tohid_Md \ud83d\udea9* \n\n> Join WhatsApp Channel :- ⤵️\n \nhttps://whatsapp.com/channel/0029VaGyP933bbVC7G0x0i2T\n\n- *YOUR PREFIX:* = ${prefix}\n\nDont forget to give star to repo ⬇️\n\nhttps://github.com/Tohidkhan6332/TOHID_MD\n\n> ©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚃𝙾𝙷𝙸𝙳_𝙼𝙳 \ud83d\udda4`;
+    conn.sendMessage(conn.user.id, { image: { url: `https://i.ibb.co/4ZSYvPTq/lordali.jpg` }, caption: up })
   }
   })
   conn.ev.on('creds.update', saveCreds)
@@ -129,7 +130,9 @@ const port = process.env.PORT || 9090;
     }
   });
   //============================== 
-          
+
+  conn.ev.on("group-participants.update", (update) => GroupEvents(conn, update));	  
+	  
   //=============readstatus=======
         
   conn.ev.on('messages.upsert', async(mek) => {
@@ -149,7 +152,7 @@ const port = process.env.PORT || 9090;
       await conn.readMessages([mek.key])
     }
   if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REACT === "true"){
-    const tohidlike = await conn.decodeJid(conn.user.id);
+    const jawadlike = await conn.decodeJid(conn.user.id);
     const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '💚'];
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     await conn.sendMessage(mek.key.remoteJid, {
@@ -157,7 +160,7 @@ const port = process.env.PORT || 9090;
         text: randomEmoji,
         key: mek.key,
       } 
-    }, { statusJidList: [mek.key.participant, tohidlike] });
+    }, { statusJidList: [mek.key.participant, jawadlike] });
   }                       
   if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
   const user = mek.key.participant
@@ -198,8 +201,8 @@ const port = process.env.PORT || 9090;
   conn.sendMessage(from, { text: teks }, { quoted: mek })
   }
   const udp = botNumber.split('@')[0];
-    const tohid = ('917849917350', '918930358452', '917849917350');
-    let isCreator = [udp, tohid, config.DEV]
+    const jawad = ('917849917350', '917849917350', '917849917350');
+    let isCreator = [udp, jawad, config.DEV]
 					.map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
 					.includes(mek.sender);
 
@@ -725,7 +728,7 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
                         global.email
                     }\nitem2.X-ABLabel:GitHub\nitem3.URL:https://github.com/${
                         global.github
-                    }/tohid_md\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
+                    }/TOHID_MD\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
                         global.location
                     };;;;\nitem4.X-ABLabel:Region\nEND:VCARD`,
                 });
@@ -766,7 +769,7 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
   }
   
   app.get("/", (req, res) => {
-  res.send("TOHID MD STARTED ✅");
+  res.send("TOHID_MD STARTED ✅");
   });
   app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
   setTimeout(() => {

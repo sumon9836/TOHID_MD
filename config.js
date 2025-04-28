@@ -13,8 +13,12 @@ AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
 // make true if you want auto reply on status 
 AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true",
 // make true if you want auto reply on status 
-AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY TOHID_MD 🤍*",
+AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY TOHID_MD 🇮🇳*",
 // set the auto reply massage on status reply  
+WELCOME: process.env.WELCOME || "true",
+// true if want welcome and goodbye msg in groups    
+ADMIN_EVENTS: process.env.ADMIN_EVENTS || "false",
+// make true to know who dismiss or promoted a member in group
 ANTI_LINK: process.env.ANTI_LINK || "true",
 // make anti link true,false for groups 
 MENTION_REPLY: process.env.MENTION_REPLY || "false",
@@ -37,11 +41,11 @@ OWNER_NUMBER: process.env.OWNER_NUMBER || "917849917350",
 // add your bot owner number
 OWNER_NAME: process.env.OWNER_NAME || "Mr Tohid",
 // add bot owner name
-DESCRIPTION: process.env.DESCRIPTION || "*© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚃𝙾𝙷𝙸𝙳_𝙼𝙳*",
+DESCRIPTION: process.env.DESCRIPTION || "*©𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚃𝙾𝙷𝙸𝙳_𝙼𝙳*",
 // add bot owner name    
-ALIVE_IMG: process.env.ALIVE_IMG || "https://i.ibb.co/LdsCGP4M/lordali.jpg",
+ALIVE_IMG: process.env.ALIVE_IMG || "https://i.ibb.co/4ZSYvPTq/lordali.jpg",
 // add img for alive msg
-LIVE_MSG: process.env.LIVE_MSG || "> *HEY 👋 I'M ALIVE NOW*⚡",
+LIVE_MSG: process.env.LIVE_MSG || "> TOHID_MD BOT IS ALIVE*⚡",
 // add alive msg here 
 READ_MESSAGE: process.env.READ_MESSAGE || "false",
 // Turn true or false for automatic read msgs

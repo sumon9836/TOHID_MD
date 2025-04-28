@@ -79,7 +79,7 @@
     "AUTO_STATUS_MSG": {
       "description": "Type custom message on status reply",
       "required": true,
-      "value": "*SEEN YOUR STATUS BY TOHID_MD🖤*"
+      "value": "*SEEN YOUR STATUS BY TOHID_MD 🇮🇳*"
    
      }, 
     
@@ -183,6 +183,18 @@
       "required": false,
       "value": "log"
     }, 
+
+    "ADMIN_EVENTS": {
+      "description": "make it true if want know who promote or demote a member .",
+      "required": false,
+      "value": "false"
+    },
+
+    "WELCOME": {
+      "description": "make it true if want goodbye and welcome message in groups.",
+      "required": false,
+      "value": "true"
+    },
 
     "READ_MESSAGE": {
       "description": "Make it true if you want bot read your all sms just now.",
