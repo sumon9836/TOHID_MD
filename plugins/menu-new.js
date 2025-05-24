@@ -2,14 +2,6 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
-
-// Define paths for video assets
-const videoPath = './assets/tohid.mp4';
-const videoThumbPath = './assets/tohid.jpg';
-const profilePicPath = './assets/tohid.jpg';
-const audioUrl = 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/menunew.m4a';
 
 cmd({
     pattern: "menu",
@@ -27,19 +19,19 @@ cmd({
 ┃◈├• 🚀 Platform : *Heroku*
 ┃◈├• ⚙️ Mode : *[${config.MODE}]*
 ┃◈├• 🔣 Prefix : *[${config.PREFIX}]*
-┃◈├• 🏷️ Version : *4.5.0 Bᴇᴛᴀ*
+┃◈├• 🏷️ Version : *4.0.0 Bᴇᴛᴀ*
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴❍「 *BOT STATUS* 」❍
-┃◈├•➊  📥 *Download Menu* - Media downloads
-┃◈├•➋  👥 *Group Menu* - Group management
-┃◈├•➌  🤣 *Fun Menu* - Entertainment
-┃◈├•➍  👑 *Owner Menu* - Bot owner tools
-┃◈├•➎  🤖 *AI Menu* - AI features
-┃◈├•➏  🎎 *Anime Menu* - Anime content
-┃◈├•➐  ♻️ *Convert Menu* - File conversion
-┃◈├•➑  📌 *Other Menu* - Utilities
-┃◈├•➒  💔 *Reactions Menu* - Expressive actions
-┃◈├•➊⓿ 🏫 *Main Menu* - Core commands
+┃◈├•➊  📥 *Download Menu*
+┃◈├•➋  👥 *Group Menu*
+┃◈├•➌  🤣 *Fun Menu*
+┃◈├•➍  👑 *Owner Menu*
+┃◈├•➎  🤖 *AI Menu*
+┃◈├•➏  🎎 *Anime Menu*
+┃◈├•➐  ♻️ *Convert Menu*
+┃◈├•➑  📌 *Other Menu*
+┃◈├•➒  💔 *Reactions Menu*
+┃◈├•➊⓿ 🏫 *Main Menu*
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴────────────●●►
 ┃◈├ ╔═╦═╗───╔══╗╔╗╔╗╔╗
@@ -64,43 +56,7 @@ cmd({
             }
         };
 
-        // Function to check if file exists
-        const fileExists = (filePath) => {
-            try {
-                return fs.existsSync(filePath);
-            } catch {
-                return false;
-            }
-        };
-
-        // Function to send menu video with thumbnail
-        const sendMenuVideo = async () => {
-            try {
-                if (fileExists(videoPath) && fileExists(videoThumbPath)) {
-                    const videoBuffer = fs.readFileSync(videoPath);
-                    const thumbnailBuffer = fs.readFileSync(videoThumbPath);
-                    
-                    return await conn.sendMessage(
-                        from,
-                        {
-                            video: videoBuffer,
-                            caption: menuCaption,
-                            thumbnail: thumbnailBuffer,
-                            contextInfo: contextInfo
-                        },
-                        { quoted: mek }
-                    );
-                } else {
-                    console.log('Video files not found, falling back to image');
-                    return await sendMenuImage();
-                }
-            } catch (e) {
-                console.log('Video send failed:', e);
-                return await sendMenuImage();
-            }
-        };
-
-        // Function to send menu image
+        // Function to send menu image with timeout
         const sendMenuImage = async () => {
             try {
                 return await conn.sendMessage(
@@ -122,37 +78,27 @@ cmd({
             }
         };
 
-        // Function to send menu audio
+        // Function to send menu audio with timeout
         const sendMenuAudio = async () => {
             try {
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after image/video
-                
-                if (fileExists(audioUrl)) {
-                    const audioBuffer = fs.readFileSync(audioUrl);
-                    await conn.sendMessage(from, {
-                        audio: audioBuffer,
-                        mimetype: 'audio/mp4',
-                        ptt: true,
-                    }, { quoted: mek });
-                } else {
-                    await conn.sendMessage(from, {
-                        audio: { url: audioUrl },
-                        mimetype: 'audio/mp4',
-                        ptt: true,
-                    }, { quoted: mek });
-                }
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after image
+                await conn.sendMessage(from, {
+                    audio: { url: 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/menunew.m4a' },
+                    mimetype: 'audio/mp4',
+                    ptt: true,
+                }, { quoted: mek });
             } catch (e) {
                 console.log('Audio send failed, continuing without it');
             }
         };
 
-        // Send video first, then audio sequentially
+        // Send image first, then audio sequentially
         let sentMsg;
         try {
-            // Try to send video with 10s timeout
+            // Send image with 10s timeout
             sentMsg = await Promise.race([
-                sendMenuVideo(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Video send timeout')), 10000))
+                sendMenuImage(),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Image send timeout')), 10000))
             ]);
             
             // Then send audio with 1s delay and 8s timeout
@@ -173,7 +119,7 @@ cmd({
         
         const messageID = sentMsg.key.id;
 
-        // Menu data
+        // Menu data (complete version)
         const menuData = {
             '1': {
                 title: "📥 *Download Menu* 📥",
@@ -287,7 +233,7 @@ cmd({
 ┃◈├•  • restart
 ┃◈├•  • shutdown
 ┃◈├•  • updatecmd
-┃◈╰──────────────
+┃◈╰───────────���──
 ┃◈╭──────────────
 ┃◈├•  ℹ️ *Info Tools*
 ┃◈├•  • gjid
