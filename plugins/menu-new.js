@@ -22,21 +22,21 @@ cmd({
 ┃◈├• 🏷️ Version : *4.0.0 Bᴇᴛᴀ*
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴❍「 *BOT STATUS* 」❍
-┃◈├•➊  📥 *Download Menu*
-┃◈├•➋  👥 *Group Menu*
-┃◈├•➌  🤣 *Fun Menu*
-┃◈├•➍  👑 *Owner Menu*
-┃◈├•➎  🤖 *AI Menu*
-┃◈├•➏  🎎 *Anime Menu*
-┃◈├•➐  ♻️ *Convert Menu*
-┃◈├•➑  📌 *Other Menu*
-┃◈├•➒  💔 *Reactions Menu*
-┃◈├•➊⓿ 🏫 *Main Menu*
+┃◈├• 📥 *Download Menu* - Media downloads
+┃◈├• 👥 *Group Menu* - Group management
+┃◈├• 🤣 *Fun Menu* - Entertainment
+┃◈├• 👑 *Owner Menu* - Bot owner tools
+┃◈├• 🤖 *AI Menu* - AI features
+┃◈├• 🎎 *Anime Menu* - Anime content
+┃◈├• ♻️ *Convert Menu* - File conversion
+┃◈├• 📌 *Other Menu* - Utilities
+┃◈├• 💔 *Reactions Menu* - Expressive actions
+┃◈├• 🏫 *Main Menu* - Core commands
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴────────────●●►
 ┃◈├ ╔═╦═╗───╔══╗╔╗╔╗╔╗
 ┃◈├ ║║║║╠╦╦═╩╗╔╩╣╚╬╬╝║
-┃◈├ ║║║║║╔╩══╣║╬║║║║╬║
+┃◈├ ║║║║║╔╩══╣║╬║║║║║║
 ┃◈├ ╚╩═╩╩╝───╚╩═╩╩╩╩═╝
 ┃◈╰─┬────────────●●►
 ┃◈╭─┴────────────●●►
@@ -56,20 +56,20 @@ cmd({
             }
         };
 
-        // Function to send menu image with timeout
-        const sendMenuImage = async () => {
+        // Function to send menu video
+        const sendMenuVideo = async () => {
             try {
                 return await conn.sendMessage(
                     from,
                     {
-                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/4ZSYvPTq/lordali.jpg' },
+                        video: { url: config.MENU_VIDEO_URL || 'https://files.catbox.moe/lnqhn4.mp4' },
                         caption: menuCaption,
                         contextInfo: contextInfo
                     },
                     { quoted: mek }
                 );
             } catch (e) {
-                console.log('Image send failed, falling back to text');
+                console.log('Video send failed, falling back to text');
                 return await conn.sendMessage(
                     from,
                     { text: menuCaption, contextInfo: contextInfo },
@@ -81,7 +81,7 @@ cmd({
         // Function to send menu audio with timeout
         const sendMenuAudio = async () => {
             try {
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after image
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after video
                 await conn.sendMessage(from, {
                     audio: { url: 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/menunew.m4a' },
                     mimetype: 'audio/mp4',
@@ -92,13 +92,13 @@ cmd({
             }
         };
 
-        // Send image first, then audio sequentially
+        // Send video first, then audio sequentially
         let sentMsg;
         try {
-            // Send image with 10s timeout
+            // Send video with 15s timeout (videos may take longer to load)
             sentMsg = await Promise.race([
-                sendMenuImage(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Image send timeout')), 10000))
+                sendMenuVideo(),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Video send timeout')), 15000))
             ]);
             
             // Then send audio with 1s delay and 8s timeout
@@ -154,7 +154,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '2': {
                 title: "👥 *Group Menu* 👥",
@@ -190,7 +190,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '3': {
                 title: "😄 *Fun Menu* 😄",
@@ -219,7 +219,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '4': {
                 title: "👑 *Owner Menu* 👑",
@@ -233,7 +233,7 @@ cmd({
 ┃◈├•  • restart
 ┃◈├•  • shutdown
 ┃◈├•  • updatecmd
-┃◈╰───────────���──
+┃◈╰──────────────
 ┃◈╭──────────────
 ┃◈├•  ℹ️ *Info Tools*
 ┃◈├•  • gjid
@@ -243,7 +243,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '5': {
                 title: "🤖 *AI Menu* 🤖",
@@ -271,7 +271,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '6': {
                 title: "🎎 *Anime Menu* 🎎",
@@ -298,7 +298,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '7': {
                 title: "🔄 *Convert Menu* 🔄",
@@ -321,7 +321,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '8': {
                 title: "📌 *Other Menu* 📌",
@@ -351,7 +351,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '9': {
                 title: "💞 *Reactions Menu* 💞",
@@ -382,7 +382,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             },
             '10': {
                 title: "🏠 *Main Menu* 🏠",
@@ -405,7 +405,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                image: true
+                video: true
             }
         };
 
@@ -426,11 +426,11 @@ cmd({
                         const selectedMenu = menuData[receivedText];
                         
                         try {
-                            if (selectedMenu.image) {
+                            if (selectedMenu.video) {
                                 await conn.sendMessage(
                                     senderID,
                                     {
-                                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/4ZSYvPTq/lordali.jpg' },
+                                        video: { url: config.MENU_VIDEO_URL || 'https://files.catbox.moe/lnqhn4.mp4' },
                                         caption: selectedMenu.content,
                                         contextInfo: contextInfo
                                     },
