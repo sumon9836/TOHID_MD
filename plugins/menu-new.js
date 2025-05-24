@@ -2,6 +2,14 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
 const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+
+// Define paths for video assets
+const videoPath = './assets/tohid.mp4';
+const videoThumbPath = './assets/tohid.jpg';
+const profilePicPath = './assets/tohid.jpg';
+const audioUrl = 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/menunew.m4a';
 
 cmd({
     pattern: "menu",
@@ -19,24 +27,24 @@ cmd({
 ┃◈├• 🚀 Platform : *Heroku*
 ┃◈├• ⚙️ Mode : *[${config.MODE}]*
 ┃◈├• 🔣 Prefix : *[${config.PREFIX}]*
-┃◈├• 🏷️ Version : *4.0.0 Bᴇᴛᴀ*
+┃◈├• 🏷️ Version : *4.5.0 Bᴇᴛᴀ*
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴❍「 *BOT STATUS* 」❍
-┃◈├• 📥 *Download Menu* - Media downloads
-┃◈├• 👥 *Group Menu* - Group management
-┃◈├• 🤣 *Fun Menu* - Entertainment
-┃◈├• 👑 *Owner Menu* - Bot owner tools
-┃◈├• 🤖 *AI Menu* - AI features
-┃◈├• 🎎 *Anime Menu* - Anime content
-┃◈├• ♻️ *Convert Menu* - File conversion
-┃◈├• 📌 *Other Menu* - Utilities
-┃◈├• 💔 *Reactions Menu* - Expressive actions
-┃◈├• 🏫 *Main Menu* - Core commands
+┃◈├•➊  📥 *Download Menu* - Media downloads
+┃◈├•➋  👥 *Group Menu* - Group management
+┃◈├•➌  🤣 *Fun Menu* - Entertainment
+┃◈├•➍  👑 *Owner Menu* - Bot owner tools
+┃◈├•➎  🤖 *AI Menu* - AI features
+┃◈├•➏  🎎 *Anime Menu* - Anime content
+┃◈├•➐  ♻️ *Convert Menu* - File conversion
+┃◈├•➑  📌 *Other Menu* - Utilities
+┃◈├•➒  💔 *Reactions Menu* - Expressive actions
+┃◈├•➊⓿ 🏫 *Main Menu* - Core commands
 ┃◈╰─┬─★─☆──♪♪─❍
 ┃◈╭─┴────────────●●►
 ┃◈├ ╔═╦═╗───╔══╗╔╗╔╗╔╗
 ┃◈├ ║║║║╠╦╦═╩╗╔╩╣╚╬╬╝║
-┃◈├ ║║║║║╔╩══╣║╬║║║║║║
+┃◈├ ║║║║║╔╩══╣║╬║║║║╬║
 ┃◈├ ╚╩═╩╩╝───╚╩═╩╩╩╩═╝
 ┃◈╰─┬────────────●●►
 ┃◈╭─┴────────────●●►
@@ -56,20 +64,56 @@ cmd({
             }
         };
 
-        // Function to send menu video
+        // Function to check if file exists
+        const fileExists = (filePath) => {
+            try {
+                return fs.existsSync(filePath);
+            } catch {
+                return false;
+            }
+        };
+
+        // Function to send menu video with thumbnail
         const sendMenuVideo = async () => {
+            try {
+                if (fileExists(videoPath) && fileExists(videoThumbPath)) {
+                    const videoBuffer = fs.readFileSync(videoPath);
+                    const thumbnailBuffer = fs.readFileSync(videoThumbPath);
+                    
+                    return await conn.sendMessage(
+                        from,
+                        {
+                            video: videoBuffer,
+                            caption: menuCaption,
+                            thumbnail: thumbnailBuffer,
+                            contextInfo: contextInfo
+                        },
+                        { quoted: mek }
+                    );
+                } else {
+                    console.log('Video files not found, falling back to image');
+                    return await sendMenuImage();
+                }
+            } catch (e) {
+                console.log('Video send failed:', e);
+                return await sendMenuImage();
+            }
+        };
+
+        // Function to send menu image
+        const sendMenuImage = async () => {
             try {
                 return await conn.sendMessage(
                     from,
                     {
-                        video: { url: config.MENU_VIDEO_URL || 'https://files.catbox.moe/lnqhn4.mp4' },
+                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/4ZSYvPTq/lordali.jpg' },
                         caption: menuCaption,
                         contextInfo: contextInfo
                     },
                     { quoted: mek }
                 );
             } catch (e) {
-                console.log('Video send failed, falling back to text');
+                console.log('Image send failed, falling back to text');
                 return await conn.sendMessage(
                     from,
                     { text: menuCaption, contextInfo: contextInfo },
@@ -78,15 +122,25 @@ cmd({
             }
         };
 
-        // Function to send menu audio with timeout
+        // Function to send menu audio
         const sendMenuAudio = async () => {
             try {
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after video
-                await conn.sendMessage(from, {
-                    audio: { url: 'https://github.com/Tohidkhan6332/TOHID-DATA/raw/refs/heads/main/autovoice/menunew.m4a' },
-                    mimetype: 'audio/mp4',
-                    ptt: true,
-                }, { quoted: mek });
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after image/video
+                
+                if (fileExists(audioUrl)) {
+                    const audioBuffer = fs.readFileSync(audioUrl);
+                    await conn.sendMessage(from, {
+                        audio: audioBuffer,
+                        mimetype: 'audio/mp4',
+                        ptt: true,
+                    }, { quoted: mek });
+                } else {
+                    await conn.sendMessage(from, {
+                        audio: { url: audioUrl },
+                        mimetype: 'audio/mp4',
+                        ptt: true,
+                    }, { quoted: mek });
+                }
             } catch (e) {
                 console.log('Audio send failed, continuing without it');
             }
@@ -95,10 +149,10 @@ cmd({
         // Send video first, then audio sequentially
         let sentMsg;
         try {
-            // Send video with 15s timeout (videos may take longer to load)
+            // Try to send video with 10s timeout
             sentMsg = await Promise.race([
                 sendMenuVideo(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Video send timeout')), 15000))
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Video send timeout')), 10000))
             ]);
             
             // Then send audio with 1s delay and 8s timeout
@@ -119,7 +173,7 @@ cmd({
         
         const messageID = sentMsg.key.id;
 
-        // Menu data (complete version)
+        // Menu data
         const menuData = {
             '1': {
                 title: "📥 *Download Menu* 📥",
@@ -154,7 +208,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '2': {
                 title: "👥 *Group Menu* 👥",
@@ -190,7 +244,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '3': {
                 title: "😄 *Fun Menu* 😄",
@@ -219,7 +273,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '4': {
                 title: "👑 *Owner Menu* 👑",
@@ -243,7 +297,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '5': {
                 title: "🤖 *AI Menu* 🤖",
@@ -271,7 +325,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '6': {
                 title: "🎎 *Anime Menu* 🎎",
@@ -298,7 +352,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '7': {
                 title: "🔄 *Convert Menu* 🔄",
@@ -321,7 +375,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '8': {
                 title: "📌 *Other Menu* 📌",
@@ -351,7 +405,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '9': {
                 title: "💞 *Reactions Menu* 💞",
@@ -382,7 +436,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             },
             '10': {
                 title: "🏠 *Main Menu* 🏠",
@@ -405,7 +459,7 @@ cmd({
 ┃◈╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 > ${config.DESCRIPTION}`,
-                video: true
+                image: true
             }
         };
 
@@ -426,11 +480,11 @@ cmd({
                         const selectedMenu = menuData[receivedText];
                         
                         try {
-                            if (selectedMenu.video) {
+                            if (selectedMenu.image) {
                                 await conn.sendMessage(
                                     senderID,
                                     {
-                                        video: { url: config.MENU_VIDEO_URL || 'https://files.catbox.moe/lnqhn4.mp4' },
+                                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/4ZSYvPTq/lordali.jpg' },
                                         caption: selectedMenu.content,
                                         contextInfo: contextInfo
                                     },
