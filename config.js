@@ -25,6 +25,8 @@ MENTION_REPLY: process.env.MENTION_REPLY || "false",
 // make true if want auto voice reply if someone menetion you 
 MENU_IMAGE_URL: process.env.MENU_IMAGE_URL || "https://i.ibb.co/4ZSYvPTq/lordali.jpg",
 // add custom menu and mention reply image url
+MENU_VIDEO_URL: process.env.MENU_VIDEO_URL || "https://files.catbox.moe/lnqhn4.mp4",
+// add custom menu and mention reply image url
 PREFIX: process.env.PREFIX || ".",
 // add your prifix for bot   
 BOT_NAME: process.env.BOT_NAME || "TOHID_MD",
