@@ -7,8 +7,8 @@ const axios = require("axios");
 const { cmd, commands } = require('../command');
 
 cmd({
-  pattern: "ig",
-  alias: ["insta", "Instagram"],
+  pattern: "ig2",
+  alias: ["insta2", "Instagram2"],
   desc: "To download Instagram videos.",
   react: "🎥",
   category: "download",
@@ -75,7 +75,7 @@ cmd({
 
     const { desc, thumb, video_sd, video_hd } = data.result;
 
-    const caption = `╭━━━〔 *TOHID_MD TWITTER DOWNLOADER* 〕━━━⊷\n`
+    const caption = `╭━━━〔 * TOHID_MD TWITTER DOWNLOADER* 〕━━━⊷\n`
       + `┃▸ *Description:* ${desc || "No description"}\n`
       + `╰━━━⪼\n\n`
       + `📹 *Download Options:*\n`
