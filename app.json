@@ -1,6 +1,6 @@
 {
   "name": "TOHID_MD",
-  "description": "Javascript WhatsApp bot made by Tohid Khan",
+  "description": "Javascript WhatsApp bot made by MR TOHID",
   "logo": "https://i.ibb.co/4ZSYvPTq/lordali.jpg",
   "keywords": ["TOHID_MD"],
   "success_url": "/",
@@ -31,20 +31,19 @@
       "value": "public"
       
     },
-    
+
+     "ANTI_DELETE": {
+      "description": "set true for show deleted messages.",
+      "required": false,
+      "value": "true"  
+    },
     
     "ALWAYS_ONLINE": {
       "description": "Make it true if want always online.",
       "required": false,
       "value": "false"  
     },    
-  
-    "AUTO_VOICE": {
-      "description": "Make it true if want automatic voice reply .",
-      "required": false,
-      "value": "false"
-    }, 
-
+   
     "AUTO_REPLY": {
       "description": "Make it true if you want automatic reply.",
       "required": false,
@@ -175,13 +174,13 @@
     "CUSTOM_REACT_EMOJIS": {
       "description": "put here custom react react emojis.",
       "required": false,
-      "value": "💝,💖,💗,❤️‍🩹,❤️,🧡,💛,💚,💙,💜,🤎,🖤,🇮🇳"
+      "value": "💝,💖,💗,❤️‍🩹,❤️,🧡,💛,💚,💙,💜,🤎,🖤,🤍"
     }, 
     
     "ANTI_DEL_PATH": {
-      "description": "change it to -same- if you want to resend deleted message in same chat",
+      "description": "change it to -same- if you want to resend deleted message in same chat othwise inbox",
       "required": false,
-      "value": "log"
+      "value": "inbox"
     }, 
 
     "ADMIN_EVENTS": {
